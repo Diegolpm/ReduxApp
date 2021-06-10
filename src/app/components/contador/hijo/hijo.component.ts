@@ -1,7 +1,7 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { props, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { Dividir, Multiplicar } from '../ngrx/contador.actions';
+import { Dividir, Multiplicar } from '../../../common/ngrx/actions/contador.action';
 
 @Component({
   selector: 'app-hijo',

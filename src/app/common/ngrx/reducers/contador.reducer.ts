@@ -1,22 +1,6 @@
 import { ActionCreator, createReducer, on } from "@ngrx/store";
 import { Action } from "rxjs/internal/scheduler/Action";
-import { Decrementar, Incrementar, Multiplicar, Dividir, Reset } from "./contador.actions";
-
-
-// export function contadorReducer(state: number = 10, action: ActionCreator) {
-//     switch (action.type) {
-
-
-//         case 'INCREMENTAR':
-//             return state + 1;
-
-//         case 'DECREMENTAR':
-//             return state - 1;
-
-//         default:
-//             return state;
-//     }
-// }
+import { Decrementar, Incrementar, Multiplicar, Dividir, Reset } from "../actions/contador.action";
 
 export const initialState = 10;
 
