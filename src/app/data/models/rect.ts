@@ -15,6 +15,7 @@ export class Rect {
         this.y = (this.ctx.canvas.height - h) - 40;
     }
 
+
     public moveRight() {
         if (this.x < (this.ctx.canvas.width - this.w)) {
             this.x += this.speed;
@@ -29,9 +30,11 @@ export class Rect {
 
     }
 
-    private drawn() {
+    private draw(): void {
         this.y = (this.ctx.canvas.height - this.h) - 40;
         this.ctx.fillStyle = this.color;
         this.ctx.fillRect(this.x, this.y, this.w, this.h);
     }
+
+
 }

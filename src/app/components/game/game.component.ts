@@ -51,14 +51,17 @@ export class GameComponent implements OnInit {
   draw() {
     this.ctx.clearRect(0, 0, this.ctx.canvas.width, this.ctx.canvas.height);
     this.ctx.fillStyle = 'black';
-    this.ctx.fillRect(0, this.canvas.nativeElement.height - 40, this.canvas.nativeElement.width, this.canvas.nativeElement.height);
-
+    this.ctx.fillRect(0, this.canvas.nativeElement.height - 40, this.canvas.nativeElement.width, 40);
     if (this.right) {
       this.rect.moveRight();
     } else if (this.left) {
       this.rect.moveLeft();
     }
     this.rect.draw();
+    // this.rect.moveLeft();
+
+    // this.speed$ = this.store.pipe(select(mainCharSelector.getSpeed));
+
     this.requestId = requestAnimationFrame(() => this.draw);
   }
 
