@@ -3,6 +3,8 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { Rect } from 'src/app/data/models/rect';
 import * as main from 'src/app/common/ngrx/actions';
+import * as mainCharSelector from 'src/app/common/ngrx/selectors/mainchar.selector';
+import { fromRoot } from 'src/app/common/ngrx/index.git';
 
 @Component({
   selector: 'app-game',
@@ -19,10 +21,17 @@ export class GameComponent implements OnInit {
   left = false;
 
   mainChar$: Observable<any>;
+  speed$: Observable<number>;
+
+  git$: Observable<any>;
 
   constructor(public render: Renderer2,
-    private store: Store<{ mainChar: any }>) {
+    private store: Store<{ mainChar: any }>,
+    private gitStore: Store<{ gitState: any }>) {
+
     this.mainChar$ = store.select('mainChar');
+    this.speed$ = store.select(mainCharSelector.getSpeed);
+
   }
 
   ngOnInit(): void {
@@ -58,9 +67,8 @@ export class GameComponent implements OnInit {
       this.rect.moveLeft();
     }
     this.rect.draw();
-    // this.rect.moveLeft();
 
-    // this.speed$ = this.store.pipe(select(mainCharSelector.getSpeed));
+    this.speed$ = this.store.select(mainCharSelector.getSpeed);
 
     this.requestId = requestAnimationFrame(() => this.draw);
   }
@@ -93,6 +101,16 @@ export class GameComponent implements OnInit {
       this.rect.h = res.h;
       this.rect.color = res.color;
     });
+  }
+
+  getApiData() {
+    this.gitStore.dispatch(fromRoot.ApiGetData({ id: 'ctmil' }));
+    this.store.subscribe(a => console.log(a));
+  }
+
+  getError() {
+    this.gitStore.dispatch(fromRoot.ApiGetDataError({ id: 'ctmil' }));
+    this.store.subscribe(a => console.log(a));
   }
 
 }

@@ -12,6 +12,8 @@ import { environment } from '../environments/environment';
 import { GameComponent } from './components/game/game.component';
 import { ContadorComponent } from './components/contador/contador.component';
 import { mainReducer } from './common/ngrx/reducers/mainchar.reducer';
+import { EffectsModule } from '@ngrx/effects';
+import { fromRoot } from './common/ngrx/index.git';
 
 @NgModule({
   declarations: [
@@ -26,12 +28,15 @@ import { mainReducer } from './common/ngrx/reducers/mainchar.reducer';
     AppRoutingModule,
     StoreModule.forRoot({
       contador: contadorReducer,
-      mainChar: mainReducer
+      mainChar: mainReducer,
+      gitState: fromRoot.gitReducer
     }),
+    EffectsModule.forRoot([fromRoot.GitEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production
-    })
+    }),
+    EffectsModule.forRoot([])
   ],
   providers: [],
   bootstrap: [AppComponent]
